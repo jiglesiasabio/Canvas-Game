@@ -410,8 +410,8 @@ var main = function () {
 	if(gameOver && (37 in keysDown ||38 in keysDown ||39 in keysDown ||40 in keysDown)){
 		gameOver = false;
 		lifePoints = 3;
-		points = 0;
-	}
+		counter = 0;
+		}
 
 };
 
