@@ -28,6 +28,11 @@ EL MOSNTRUO ROJO YA ESTÁ (100,100) AHORA HAY QUE HACER QUE SE MUEVA HACIA EL H�
 FUNCIÓN 'DETERMINAR_DIRECCIÓN_MONSTRUO_ROJO'
 
 
+
+
+METER MODO PAUSE-START
+
+
 */
 
 
@@ -36,7 +41,9 @@ var counter = 0;
 var lifePoints = 3;
 
 var gameOver = new Boolean();
-gameOver = false;
+gameOver = true;
+
+
 
 
 // Create the canvas
@@ -191,7 +198,6 @@ var moverMonstruoRojo = function () {
 
 // Update game objects
 var update = function (modifier) {
-
 
 	if(!gameOver){
 	moverMonstruoRojo();
@@ -364,7 +370,7 @@ var main = function () {
 	var now = Date.now();
 	var delta = now - then;
 	time++;
-	//$('#timer').html(time);	
+	$('#timer').html(time + "-" + gameOver);	
 	
 
 	//aparición paseante
@@ -385,6 +391,12 @@ var main = function () {
 	//}
 
 	if(lifePoints <= 0){
+	
+		gameOver = true;
+
+	}
+
+	if(gameOver){
 		// GAME OVER
 		ctx.fillStyle = "rgb(250, 250, 250)";
 		ctx.font = "34px Helvetica";
@@ -392,12 +404,20 @@ var main = function () {
 		ctx.textBaseline = "top";
 		ctx.fillText("Game Over", 170, 200);
 
-		gameOver = true;
-
+	
 	}
+
+	if(gameOver && (37 in keysDown ||38 in keysDown ||39 in keysDown ||40 in keysDown)){
+		gameOver = false;
+		lifePoints = 3;
+	}
+
 };
 
 // Let's play this game!
 reset();
 var then = Date.now();
+
+
+
 setInterval(main, 1); // Execute as fast as possible
